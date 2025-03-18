@@ -1,24 +1,23 @@
 n = int(input())
 
-queen = [-1] * n
+pos = [0] * n
+flag_a = [False] * n            # 각 열에 퀸을 배치했는지 체크
+flag_b = [False] * (2 * n - 1)  # 각 대각선(↙↗)에 퀸을 배치했는지 체크
+flag_c = [False] * (2 * n - 1)  # 각 대각선(↖↘)에 퀸을 배치했는지 체크
 
-def is_able_attack(row, col):
-    for i in range(row):
-        if queen[i] == col:
-            return False
-        if abs(row - i) == abs(col- queen[i]):
-            return False
-    return True
+count = 0  
 
-def recursion(n, row):
-    count = 0
-    if row == n:
-        return 1
+def set(i: int) -> None:
+    global count
+    for j in range(n):
+        if not flag_a[j] and not flag_b[i + j] and not flag_c[i - j + n - 1]:
+            pos[i] = j
+            if i == n - 1:
+                count += 1
+            else:
+                flag_a[j] = flag_b[i + j] = flag_c[i - j + n - 1] = True
+                set(i + 1)
+                flag_a[j] = flag_b[i + j] = flag_c[i - j + n - 1] = False
 
-    for col in range(n):
-        if is_able_attack(row, col):
-            queen[row] = col
-            count += recursion(n, row+1)
-    return count
-
-print(recursion(n, 0))
+set(0)
+print(count)
