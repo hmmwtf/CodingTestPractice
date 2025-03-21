@@ -3,17 +3,14 @@ import sys
 input = sys.stdin.readline
 
 n = int(input().strip())
+height = [int(input().strip()) for _ in range(n)]
 
-height = []
+stack = []
 
-for i in range(n):
-    height.append(int(input().strip()))
+stack.append(height[-1])
 
-view = height[-1]
-cnt = 1
-for i in range(len(height)-1, -1, -1):
-    if height[i] > view:
-        cnt += 1
-        view = height[i]
+for i in range(n - 2, -1, -1):
+    if height[i] > stack[-1]:
+        stack.append(height[i])
 
-print(cnt)
+print(len(stack))
