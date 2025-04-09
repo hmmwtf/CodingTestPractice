@@ -1,4 +1,4 @@
-import sys, re
+import sys
 input = sys.stdin.readline
 
 expression = input().strip()
