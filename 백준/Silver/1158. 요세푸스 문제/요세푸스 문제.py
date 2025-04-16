@@ -1,17 +1,13 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
 
-def jp(n, k):
-    queue = deque(range(1, n+1))
-    result = []
-    
-    while queue:
-        queue.rotate(-(k-1))
-        result.append(queue.popleft())
-        
-    return result
+n, k = map(int, input().strip().split())
+arr = list(range(1, n + 1))
+result = []
+idx = 0
 
-n,k = map(int, input().strip().split())
-output = jp(n, k)
-print("<" + ", ".join(map(str, output)) + ">")
+while arr:
+    idx = (idx + k - 1) % len(arr)
+    result.append(arr.pop(idx))
+    
+print("<" + ", ".join(map(str, result)) + ">")
