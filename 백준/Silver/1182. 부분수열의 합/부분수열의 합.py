@@ -1,12 +1,18 @@
-import itertools
-n, s = map(int, input().split())
-arr = list(map(int, input().split()))
+import sys
+from itertools import combinations
+input = sys.stdin.readline
 
-cnt = 0
+def solution(n, s, nums):
+    ans = 0
+    
+    for r in range(1, n + 1):
+        for comb in combinations(nums, r):
+            if sum(comb) == s:
+                ans += 1
 
-for r in range(1, n+1):
-    for com in itertools.combinations(arr, r):
-        if sum(com) == s:
-            cnt += 1
+    return ans
 
-print(cnt)
+if __name__ == '__main__':
+    n, s = map(int, input().strip().split())
+    nums = list(map(int, input().strip().split()))
+    print(solution(n, s, nums))
