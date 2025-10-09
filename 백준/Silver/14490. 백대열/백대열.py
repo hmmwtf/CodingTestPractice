@@ -9,10 +9,9 @@ def GCD(a, b):
         return GCD(b, a % b)
     
 def solution():
-    n, m = map(str, input().strip().split(':'))
-    n_int, m_int = int(n), int(m)
-    gcd = GCD(n_int, m_int)
-    print(f"{int(n_int / gcd)}:{int(m_int / gcd)}")
+    n, m = map(int, input().strip().split(':'))  
+    gcd = GCD(n, m)
+    print(f"{n // gcd}:{m // gcd}")  
     
 if __name__ == "__main__":
     solution()
